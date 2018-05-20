@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package trackweb.model;
+package org.traccar.api.model;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 
@@ -26,12 +26,6 @@ public class CellTower {
         cellTower.setMobileNetworkCode(mnc);
         cellTower.setLocationAreaCode(lac);
         cellTower.setCellId(cid);
-        return cellTower;
-    }
-
-    public static CellTower from(int mcc, int mnc, int lac, long cid, int rssi) {
-        CellTower cellTower = CellTower.from(mcc, mnc, lac, cid);
-        cellTower.setSignalStrength(rssi);
         return cellTower;
     }
 

@@ -13,7 +13,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package trackweb.model;
+package org.traccar.api.model;
 
 import java.util.Date;
 
@@ -283,6 +283,11 @@ public class Position extends Message {
 
     public void setNetwork(Network network) {
         this.network = network;
+    }
+
+    @Override
+    public String getType() {
+        return super.getType();
     }
 
 }
