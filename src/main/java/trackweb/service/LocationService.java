@@ -21,7 +21,7 @@ import lombok.extern.log4j.Log4j2;
 @Log4j2
 public class LocationService {
 
-	private static FastDateFormat DATE_FORMATTER = DateFormatUtils.ISO_8601_EXTENDED_DATETIME_FORMAT;
+	private final static FastDateFormat DATE_FORMATTER = DateFormatUtils.ISO_8601_EXTENDED_DATETIME_FORMAT;
 
 	public List<Position> getRoute(Date from, Date to) {
 		List<Position> list = new ArrayList<>();
