@@ -19,7 +19,7 @@ public class TraccarApiClient {
 		requestBuilder = new Request.Builder().addHeader("Accept", "application/json")
 				.addHeader("Content-Type", "application/json")
 				// TODO uit config file.
-				.addHeader("Authorization", "Basic c3BhbW1lbmljaHQ3QGdtYWlsLmNvbTpFY2h0d2VsMDEh")
+				.addHeader("Authorization", "Basic TODO")
 				.addHeader("Cache-Control", "no-cache");
 	}
 
