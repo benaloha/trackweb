@@ -51,16 +51,40 @@
 				<p:columnToggler datasource="pointsTable" trigger="toggler" />
 			</f:facet>
 
-			<p:column headerText="Time">
+			<p:column headerText="ID">
+				<h:outputText value="#{point.id}" />
+			</p:column>
+			<p:column headerText="Device Time">
 				<h:outputText value="#{point.deviceTime}" />
 			</p:column>
 
+			<!-- GPS Positions -->
 			<p:column headerText="Lat">
 				<h:outputText value="#{point.latitude}" />
 			</p:column>
-
 			<p:column headerText="Long">
 				<h:outputText value="#{point.longitude}" />
+			</p:column>
+			<p:column headerText="Address">
+				<h:outputText value="#{point.address}" />
+			</p:column>
+			<!-- movement -->
+			<p:column headerText="Speed">
+				<h:outputText value="#{point.speed}" />
+			</p:column>
+			<p:column headerText="Distance">
+				<h:outputText value="#{point.getDouble(Position.KEY_DISTANCE)}" />
+			</p:column>
+			<p:column headerText="Tot. Dist.">
+				<h:outputText value="#{point.getDouble(Position.KEY_TOTAL_DISTANCE)}" />
+			</p:column>
+			<p:column headerText="Motion">
+				<h:outputText value="#{point.getBoolean(Position.KEY_MOTION)}" />
+			</p:column>
+			
+			<!-- diversen -->
+			<p:column headerText="Battery">
+				<h:outputText value="#{point.getDouble(Position.KEY_BATTERY_LEVEL)}" />
 			</p:column>
 		</p:dataTable>
 	</h:form>
