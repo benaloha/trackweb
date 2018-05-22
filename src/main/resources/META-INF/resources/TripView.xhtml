@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:pm="http://primefaces.org/mobile">
+
+<h:head>
+	<meta content='text/html; charset=UTF-8' http-equiv="Content-Type" />
+	<h:outputStylesheet name="style.css" />
+</h:head>
+<h:body>
+	<h:form>
+		<p:growl id="msgs" showDetail="true" />
+
+		<h:panelGrid columns="2" cellpadding="5">
+			<p:outputLabel for="from" value="From:" />
+			<p:calendar id="from" value="#{tripController.from}" />
+
+			<p:outputLabel for="to" value="To:" />
+			<p:calendar id="to" value="#{tripController.to}" />
+		</h:panelGrid>
+
+		<p:commandButton value="Show" update="pointsTable"
+			actionListener="#{tripController.submit}" icon="ui-icon-check" />
+
+		<p:dialog modal="true" resizable="false" header="Values"
+			widgetVar="dlg" showEffect="fold">
+			<p:panelGrid id="display" columns="2" columnClasses="label,value">
+				<h:outputText value="From:" />
+				<h:outputText value="#{tripController.from}">
+					<f:convertDateTime pattern="dd-MM-yyyy" />
+				</h:outputText>
+
+				<h:outputText value="To:" />
+				<h:outputText value="#{tripController.to}">
+					<f:convertDateTime pattern="dd-MM-yyyy" />
+				</h:outputText>
+			</p:panelGrid>
+		</p:dialog>
+
+		<p:dataTable id="pointsTable" var="point"
+			value="#{tripController.points}" rows="15" paginator="true"
+			paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+			rowsPerPageTemplate="10, 15, 20">
+
+			<f:facet name="header">GPS Coordinates
+         		<p:commandButton id="toggler" type="button" value="Columns"
+					style="float:right" icon="ui-icon-calculator" />
+				<p:columnToggler datasource="pointsTable" trigger="toggler" />
+			</f:facet>
+
+			<p:column headerText="Time">
+				<h:outputText value="#{point.deviceTime}" />
+			</p:column>
+
+			<p:column headerText="Lat">
+				<h:outputText value="#{point.latitude}" />
+			</p:column>
+
+			<p:column headerText="Long">
+				<h:outputText value="#{point.longitude}" />
+			</p:column>
+		</p:dataTable>
+	</h:form>
+</h:body>
+</html>

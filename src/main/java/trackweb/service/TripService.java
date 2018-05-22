@@ -19,7 +19,7 @@ import lombok.extern.log4j.Log4j2;
 
 @Service
 @Log4j2
-public class LocationService {
+public class TripService {
 
 	private final static FastDateFormat DATE_FORMATTER = DateFormatUtils.ISO_8601_EXTENDED_DATETIME_FORMAT;
 
