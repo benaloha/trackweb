@@ -47,34 +47,34 @@
 			<f:facet name="header">GPS Coordinates
 			</f:facet>
 
-			<p:column headerText="ID" sortBy="#{point.id}">
+			<p:column headerText="ID" sortBy="#{point.id}" width="40">
 				<h:outputText value="#{point.id}" />
 			</p:column>
-			<p:column headerText="Device Time" sortBy="#{point.deviceTime}">
+			<p:column headerText="Device Time" sortBy="#{point.deviceTime}" width="160">
 				<h:outputText value="#{point.deviceTime}" />
 			</p:column>
-			<p:column headerText="Address">
+			<p:column headerText="Address" width="480">
 				<h:outputText value="#{point.address}" />
 			</p:column>
-			<p:column headerText="Speed" sortBy="#{point.speed}">
+			<p:column headerText="Speed" sortBy="#{point.speed}" width="50">
 				<h:outputText value="#{point.speed}" />
 			</p:column>
-			<p:column headerText="Distance">
+			<p:column headerText="Dist." width="50">
 				<h:outputText value="#{point.getDouble(Position.KEY_DISTANCE)}" />
 			</p:column>
-			<p:column headerText="Tot. Dist.">
+			<p:column headerText="Tot.Dist." width="50">
 				<h:outputText value="#{point.getDouble(Position.KEY_TOTAL_DISTANCE)}" />
 			</p:column>
-			<p:column headerText="Motion">
+			<p:column headerText="Motion" width="50">
 				<h:outputText value="#{point.getBoolean(Position.KEY_MOTION)}" />
 			</p:column>
-			<p:column headerText="Battery">
+			<p:column headerText="Battery" width="50">
 				<h:outputText value="#{point.getDouble(Position.KEY_BATTERY_LEVEL)}" />
 			</p:column>
-			<p:column headerText="Lat">
+			<p:column headerText="Lat" width="70">
 				<h:outputText value="#{point.latitude}" />
 			</p:column>
-			<p:column headerText="Long">
+			<p:column headerText="Long" width="70">
 				<h:outputText value="#{point.longitude}" />
 			</p:column>
 		</p:dataTable>
