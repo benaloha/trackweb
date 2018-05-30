@@ -89,7 +89,7 @@
 		</dependency>
 		<dependency>
 			<groupId>org.primefaces.themes</groupId>
-			<artifactId>overcast</artifactId>
+			<artifactId>smoothness</artifactId>
 			<version>${primefaces-theme.version}</version>
 		</dependency>
 
@@ -107,13 +107,6 @@
 			<groupId>com.squareup.okhttp3</groupId>
 			<artifactId>okhttp</artifactId>
 			<version>3.10.0</version>
-		</dependency>
-
-		<!-- TODO remove -->
-		<dependency>
-			<groupId>com.pi4j</groupId>
-			<artifactId>pi4j-device</artifactId>
-			<version>1.2-SNAPSHOT</version>
 		</dependency>
 	</dependencies>
 
@@ -143,16 +136,6 @@
 			<url>http://repository.primefaces.org</url>
 			<snapshots>
 				<enabled>false</enabled>
-			</snapshots>
-		</repository>
-		<!-- for 1.2 version of pi4j -->
-		<repository>
-			<id>oss-snapshots-repo</id>
-			<name>Sonatype OSS Maven Repository</name>
-			<url>https://oss.sonatype.org/content/groups/public</url>
-			<snapshots>
-				<enabled>true</enabled>
-				<updatePolicy>always</updatePolicy>
 			</snapshots>
 		</repository>
 	</repositories>
