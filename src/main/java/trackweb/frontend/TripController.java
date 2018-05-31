@@ -12,10 +12,10 @@ import javax.inject.Inject;
 import javax.inject.Named;
 
 import org.primefaces.event.SelectEvent;
-import org.traccar.api.model.Position;
 
 import lombok.Getter;
 import lombok.Setter;
+import trackweb.model.PositionDTO;
 import trackweb.service.TripService;
 
 @Named
@@ -26,7 +26,7 @@ public class TripController implements Serializable{
 	@Inject
 	private TripService tripService;
 	@Getter
-	private List<Position> points;
+	private List<PositionDTO> points;
 	@Getter
 	@Setter
 	private Date from;

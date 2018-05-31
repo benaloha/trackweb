@@ -59,19 +59,27 @@
 				<h:outputText value="#{point.address}" />
 			</p:column>
 			<p:column headerText="Speed" sortBy="#{point.speed}" width="50">
-				<h:outputText value="#{point.speed}" />
+				<h:outputText value="#{point.speed}">
+					<f:convertNumber minFractionDigits="1" maxFractionDigits="1" />
+				</h:outputText>
 			</p:column>
 			<p:column headerText="Dist." width="50">
-				<h:outputText value="#{point.getDouble(Position.KEY_DISTANCE)}" />
+				<h:outputText value="#{point.distance}">
+					<f:convertNumber maxFractionDigits="0" />
+				</h:outputText>
 			</p:column>
 			<p:column headerText="Tot.Dist." width="50">
-				<h:outputText value="#{point.getDouble(Position.KEY_TOTAL_DISTANCE)}" />
+				<h:outputText value="#{point.totalDistance}">
+					<f:convertNumber maxFractionDigits="0" />				
+				</h:outputText>
 			</p:column>
 			<p:column headerText="Motion" width="50">
-				<h:outputText value="#{point.getBoolean(Position.KEY_MOTION)}" />
+				<h:outputText value="#{point.motion}"/>
 			</p:column>
 			<p:column headerText="Battery" width="50">
-				<h:outputText value="#{point.getDouble(Position.KEY_BATTERY_LEVEL)}" />
+				<h:outputText value="#{point.batteryLevel}">
+					<f:convertNumber maxFractionDigits="0"/>
+				</h:outputText>
 			</p:column>
 			<p:column headerText="Lat" width="70">
 				<h:outputText value="#{point.latitude}" />
@@ -79,6 +87,10 @@
 			<p:column headerText="Long" width="70">
 				<h:outputText value="#{point.longitude}" />
 			</p:column>
+			<p:column headerText="Alt" width="70">
+				<h:outputText value="#{point.altitude}" />
+			</p:column>
+			
 		</p:dataTable>
 	</h:form>
 </h:body>
