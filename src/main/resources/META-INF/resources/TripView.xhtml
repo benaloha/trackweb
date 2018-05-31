@@ -40,7 +40,7 @@
 		</p:dialog>
 
 		<p:dataTable id="pointsTable" var="point" resizableColumns="true" draggableColumns="true"
-			value="#{tripController.points}" rows="15" paginator="true"
+			value="#{tripController.points}" rows="15" paginator="true" sortBy="#{point.id}"
 			paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
 			rowsPerPageTemplate="10, 15, 20">
 
@@ -51,7 +51,9 @@
 				<h:outputText value="#{point.id}" />
 			</p:column>
 			<p:column headerText="Device Time" sortBy="#{point.deviceTime}" width="160">
-				<h:outputText value="#{point.deviceTime}" />
+				<h:outputText value="#{point.deviceTime}">
+					<f:convertDateTime pattern="HH:mm " timeZone="Europe/Amsterdam" />
+				</h:outputText>
 			</p:column>
 			<p:column headerText="Address" width="480">
 				<h:outputText value="#{point.address}" />
