@@ -40,14 +40,14 @@
 		</p:dialog>
 
 		<p:dataTable id="pointsTable" var="point" resizableColumns="true" draggableColumns="true"
-			value="#{tripController.points}" rows="15" paginator="true" sortBy="#{point.id}"
+			value="#{tripController.points}" rows="20" paginator="true" sortBy="#{point.id}"
 			paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
-			rowsPerPageTemplate="10, 15, 20">
+			rowsPerPageTemplate="10, 15, 20, 25, 30">
 
 			<f:facet name="header">GPS Coordinates
 			</f:facet>
 
-			<p:column headerText="ID" sortBy="#{point.id}" width="40">
+			<p:column headerText="ID" sortBy="#{point.id}" width="40" >
 				<h:outputText value="#{point.id}" />
 			</p:column>
 			<p:column headerText="Device Time" sortBy="#{point.deviceTime}" width="130">
@@ -58,17 +58,17 @@
 			<p:column headerText="Address" width="450">
 				<h:outputText value="#{point.address}" />
 			</p:column>
-			<p:column headerText="Speed" sortBy="#{point.speed}" width="50">
+			<p:column headerText="Speed &lt;br/&gt;[km/h]" sortBy="#{point.speed}" width="50">
 				<h:outputText value="#{point.speed}">
 					<f:convertNumber minFractionDigits="1" maxFractionDigits="1" />
 				</h:outputText>
 			</p:column>
-			<p:column headerText="Dist." width="50">
+			<p:column headerText="Dist.&lt;br/&gt;[m]" escape="false" width="50" >
 				<h:outputText value="#{point.distance}">
 					<f:convertNumber maxFractionDigits="0" />
 				</h:outputText>
 			</p:column>
-			<p:column headerText="Tot.Dist." width="60">
+			<p:column headerText="Tot.Dist.&lt;br/&gt;[km]" width="60">
 				<h:outputText value="#{point.totalDistance}">
 					<f:convertNumber pattern="#0.00" />				
 				</h:outputText>
