@@ -17,7 +17,7 @@ public class PositionDTO{
     private String address;
     private double speed; // conversion from knots to km/h
     private double distance; // meters
-    private double totalDistance; // meters.
+    private double totalDistance; // meters to km's.
     private double batteryLevel; //percentage.
     private boolean motion;
     
@@ -32,7 +32,7 @@ public class PositionDTO{
     	dto.setAddress(pos.getAddress());
     	dto.setSpeed(1.852 * pos.getSpeed());
     	dto.setDistance(pos.getDouble(Position.KEY_DISTANCE));
-    	dto.setTotalDistance(pos.getDouble(Position.KEY_TOTAL_DISTANCE));
+    	dto.setTotalDistance(pos.getDouble(Position.KEY_TOTAL_DISTANCE)/1000);
     	dto.setBatteryLevel(pos.getDouble(Position.KEY_BATTERY_LEVEL));
     	dto.setMotion(pos.getBoolean(Position.KEY_MOTION));
     	
