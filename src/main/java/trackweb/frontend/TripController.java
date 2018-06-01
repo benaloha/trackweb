@@ -25,8 +25,8 @@ public class TripController implements Serializable{
 	private static final long serialVersionUID = 6307292393448463495L;
 	@Inject
 	private TripService tripService;
-	@Getter
-	private List<PositionDTO> points;
+	@Inject
+	private TripSessionBean tripSession;
 	@Getter
 	@Setter
 	private Date from;
@@ -41,6 +41,10 @@ public class TripController implements Serializable{
     }
     
     public void submit() {
-    	points = tripService.getRoute(from, to);
+    	tripSession.setPoints(tripService.getRoute(from, to));
+    }
+    
+    public List<PositionDTO> getPoints(){
+    	return tripSession.getPoints();
     }
 }
