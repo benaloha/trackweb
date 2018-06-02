@@ -7,7 +7,7 @@ import org.traccar.api.model.Position;
 import lombok.Data;
 
 @Data
-public class PositionDTO{
+public class PositionDTO implements Comparable<PositionDTO>{
 
     private long id; 
     private Date deviceTime;
@@ -38,5 +38,10 @@ public class PositionDTO{
     	
     	return dto;
     }
+
+	@Override
+	public int compareTo(PositionDTO other) {
+		return Long.valueOf(deviceTime.getTime()).compareTo(Long.valueOf(other.getDeviceTime().getTime()));
+	}
     
 }
