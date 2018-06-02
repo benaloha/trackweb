@@ -1,0 +1,27 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core">
+
+<h:head>
+	<meta content='text/html; charset=UTF-8' http-equiv="Content-Type" />
+	<script type="text/javascript" src="tripmap.js" />
+	<h:outputStylesheet name="tripmap.css" />
+</h:head>
+
+<h:body>
+	<div id="map"></div>
+
+	<div>
+		<h:inputHidden value="#{tripMapController.route}" id="route" />
+	</div>
+
+	<script type="text/javascript" defer="defer"
+		src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDVQ47wiRESdobCG4mpLRGSnEIPFMUh6A4&amp;callback=initMap">
+	</script>
+</h:body>
+</html>
+
