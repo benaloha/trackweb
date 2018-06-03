@@ -23,18 +23,21 @@ public class TripMapController implements Serializable{
     
 	@PostConstruct
     public void init(){
-		StringBuilder sb = new StringBuilder("[");
-		
-    	for(PositionDTO point: tripSession.getPoints().stream().sorted().collect(Collectors.toList())) {
-    		sb.append("['")
-    		.append(point.getDeviceTime().toString()).append("', ")
-    		.append(point.getLatitude()).append(", ")
-    		.append(point.getLongitude()).append(", ")    		
-    		.append(point.getSpeed())
-    		.append("],");
-    	}
-    	sb.deleteCharAt(sb.length()-1).append("]");
-    	route = sb.toString();
+		if (tripSession.getPoints()!=null) {
+			
+			StringBuilder sb = new StringBuilder("[");
+			
+	    	for(PositionDTO point: tripSession.getPoints().stream().sorted().collect(Collectors.toList())) {
+	    		sb.append("['")
+	    		.append(point.getDeviceTime().toString()).append("', ")
+	    		.append(point.getLatitude()).append(", ")
+	    		.append(point.getLongitude()).append(", ")    		
+	    		.append(point.getSpeed())
+	    		.append("],");
+	    	}
+	    	sb.deleteCharAt(sb.length()-1).append("]");
+	    	route = sb.toString();
+		}
     }
     
 }

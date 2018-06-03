@@ -21,10 +21,10 @@
 			<p:calendar id="to" value="#{tripController.to}" />
 		</h:panelGrid>
 
-		<p:commandButton value="Show" update="pointsTable"
-			actionListener="#{tripController.submit}" icon="ui-icon-check" />
+		<p:commandButton value="Get Points" update="pointsTable"
+			actionListener="#{tripController.submit}"/>
 		
-		<p:button outcome="tripmap" value="Kaart"/>
+		<p:button id="mapButton" outcome="tripmap" value="Show Map"/>
 
 		<p:dialog modal="true" resizable="false" header="Values"
 			widgetVar="dlg" showEffect="fold">
