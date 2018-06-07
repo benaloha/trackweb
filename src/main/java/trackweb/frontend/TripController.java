@@ -2,6 +2,7 @@ package trackweb.frontend;
 
 import java.io.Serializable;
 import java.text.SimpleDateFormat;
+import java.time.Duration;
 import java.util.Date;
 import java.util.List;
 
@@ -33,7 +34,18 @@ public class TripController implements Serializable{
 	@Getter
 	@Setter
 	private Date to;
-		
+	@Getter
+	private String totalTime;
+	@Getter
+	private String avgSpeed;
+	@Getter
+	private String totalDistance;
+	@Getter
+	private String avgAccuPercentage;
+	@Getter
+	private String avgAltitude;
+
+				
 	public void onDateSelect(SelectEvent event) {
         FacesContext facesContext = FacesContext.getCurrentInstance();
         SimpleDateFormat format = new SimpleDateFormat("dd-MM-yyyy");
@@ -41,10 +53,34 @@ public class TripController implements Serializable{
     }
     
     public void submit() {
-    	tripSession.setPoints(tripService.getRoute(from, to));
+    	List<PositionDTO> list = tripService.getRoute(from, to);
+    	if (list != null && !list.isEmpty()) {
+        	tripSession.setPoints(list);
+        	calculateSummary();
+    	}
     }
     
-    public List<PositionDTO> getPoints(){
+    private void calculateSummary() {
+    	int size = getPoints().size();
+    	if (size == 0) return;
+
+    	PositionDTO firstP = getPoints().get(0);
+    	PositionDTO lastP = getPoints().get(size-1);
+    	Duration duration = Duration.ofMillis(lastP.getDeviceTime().getTime()-firstP.getDeviceTime().getTime());
+		double totalDistanceDouble = lastP.getTotalDistance() - firstP.getTotalDistance();
+		double avgSpeedDouble = totalDistanceDouble / duration.getSeconds() * 3600;
+		double avgAccuPercentageDouble = getPoints().stream().mapToDouble(PositionDTO::getBatteryLevel).average().orElse(0);
+		double avgAltitudeDouble = getPoints().stream().mapToDouble(PositionDTO::getAltitude).average().orElse(0);
+
+		
+		totalTime = duration.toString();
+		avgSpeed = String.format("%.1f", avgSpeedDouble);
+		totalDistance = String.format("%.1f", totalDistanceDouble);
+		avgAccuPercentage = String.format("%.0f", avgAccuPercentageDouble);
+		avgAltitude = String.format("%.5f", avgAltitudeDouble);
+	}
+
+	public List<PositionDTO> getPoints(){
     	return tripSession.getPoints();
     }
 }
