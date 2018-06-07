@@ -22,6 +22,7 @@ private TripRepository tripRepos;
 		return tripRepos.getRoute(from, to)
 				.stream()
 				.map(p -> PositionDTO.positionConverter(p))
+				.sorted()
 				.collect(Collectors.toList());
 	}
 

@@ -95,7 +95,21 @@
 				</h:outputText>
 			</p:column>
 			
-		</p:dataTable>
+			<p:columnGroup type="footer">
+                <p:row>
+                    <p:column footerText="Totals:"/>
+                    <p:column footerText="#{tripController.totalTime}" />
+                    <p:column/>
+                    <p:column footerText="#{tripController.avgSpeed}" />
+                    <p:column/>                    
+                    <p:column footerText="#{tripController.totalDistance}" />
+                    <p:column/>                    
+                    <p:column footerText="#{tripController.avgAccuPercentage}" />
+                    <p:column colspan="2"/>                    
+                    <p:column footerText="#{tripController.avgAltitude}" />
+                </p:row>
+            </p:columnGroup>
+        </p:dataTable>
 	</h:form>
 </h:body>
 </html>
