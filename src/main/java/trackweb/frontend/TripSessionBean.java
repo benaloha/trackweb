@@ -9,13 +9,16 @@ import javax.inject.Named;
 import lombok.Getter;
 import lombok.Setter;
 import trackweb.model.PositionDTO;
+import trackweb.model.TripDTO;
 
 @Named
 @SessionScoped
+@Getter
+@Setter
 public class TripSessionBean implements Serializable{
 
 	private static final long serialVersionUID = 6307292393448463495L;
-	@Getter
-	@Setter
+	private List<TripDTO> trips;
+	private TripDTO selectedTrip;
 	private List<PositionDTO> points;
 }

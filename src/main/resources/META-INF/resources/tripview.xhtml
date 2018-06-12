@@ -43,16 +43,16 @@
 
 		<p:dataTable id="tripsTable"
 			var="trip"
-			value="#{tripController.trips}"
+			value="#{tripSessionBean.trips}"
 			rowIndexVar="index" 
 			rowKey="#{trip.startTime}"
-			selection="#{tripController.selectedTrip}" 
+			selection="#{tripSessionBean.selectedTrip}" 
 			selectionMode="single"
 			resizableColumns="true"
 			scrollable="true"
 			scrollHeight="150">
 			
-			<p:ajax event="rowSelect" listener="#{tripController.onRowSelect}" />
+			<p:ajax event="rowSelect" listener="#{tripController.onTripRowSelect}" />
 			
 			<f:facet name="header">Trips
 			</f:facet>

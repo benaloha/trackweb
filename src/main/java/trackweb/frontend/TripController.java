@@ -3,7 +3,6 @@ package trackweb.frontend;
 import java.io.IOException;
 import java.io.Serializable;
 import java.util.Date;
-import java.util.List;
 
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
@@ -24,25 +23,22 @@ public class TripController implements Serializable{
 	@Inject
 	private TripService tripService;
 	@Inject
-	private TripSessionBean tripSession;
+	private TripSessionBean tripSessionBean;
 	@Getter
 	@Setter
 	private Date from;
 	@Getter
 	@Setter
 	private Date to;
-	@Getter
-	private List<TripDTO> trips;
-	@Getter
-	@Setter
-	private TripDTO selectedTrip;
     
     public void retrieveTrips() {
-    	trips = tripService.getTrips(from, to);
+    	tripSessionBean.setTrips(tripService.getTrips(from, to));
     }
     
-	public void onRowSelect(SelectEvent event) throws IOException {
-		selectedTrip = (TripDTO) event.getObject();
-		tripSession.setPoints(tripService.getRoute(selectedTrip.getStartTime(), selectedTrip.getEndTime()));
+	public void onTripRowSelect(SelectEvent event) throws IOException {
+		tripSessionBean.setSelectedTrip((TripDTO) event.getObject());
+		tripSessionBean.setPoints(tripService.getRoute(
+				tripSessionBean.getSelectedTrip().getStartTime(),
+				tripSessionBean.getSelectedTrip().getEndTime()));
 	}
 }
