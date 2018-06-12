@@ -10,7 +10,7 @@
 	<h:outputStylesheet name="style.css" />
 </h:head>
 <h:body>
-	<h:form>
+	<h:form	prependId="false">
 		<p:growl id="msgs" showDetail="true" />
 
 		<h:panelGrid columns="2" cellpadding="5">
@@ -50,9 +50,9 @@
 			selectionMode="single"
 			resizableColumns="true"
 			scrollable="true"
-			scrollHeight="150">
+			scrollHeight="100">
 			
-			<p:ajax event="rowSelect" listener="#{tripController.onTripRowSelect}" />
+			<p:ajax event="rowSelect" listener="#{tripController.onTripRowSelect}" update="pointsTable" />
 			
 			<f:facet name="header">Trips
 			</f:facet>
@@ -95,6 +95,85 @@
 			</p:column>
 			
 		</p:dataTable>
+		
+		<br/><br/>
+		
+		<p:dataTable id="pointsTable"
+			var="point" 
+			value="#{tripSessionBean.points}" 
+			resizableColumns="true"
+			draggableColumns="true"
+			rows="5"
+			paginator="true"
+			sortBy="#{point.id}"
+			paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+			rowsPerPageTemplate="5, 10, 15">
+
+			<f:facet name="header">GPS Coordinates
+			</f:facet>
+
+			<p:column headerText="ID" sortBy="#{point.id}" width="40" >
+				<h:outputText value="#{point.id}" />
+			</p:column>
+			<p:column headerText="Device Time" sortBy="#{point.deviceTime}" width="130">
+				<h:outputText value="#{point.deviceTime}">
+					<f:convertDateTime pattern="dd-MM HH:mm:ss" timeZone="Europe/Amsterdam" />
+				</h:outputText>
+			</p:column>
+			<p:column headerText="Address" width="450">
+				<h:outputText value="#{point.address}" />
+			</p:column>
+			<p:column headerText="Speed &lt;br/&gt;[km/h]" sortBy="#{point.speed}" width="50">
+				<h:outputText value="#{point.speed}">
+					<f:convertNumber minFractionDigits="1" maxFractionDigits="1" />
+				</h:outputText>
+			</p:column>
+			<p:column headerText="Dist.&lt;br/&gt;[m]" escape="false" width="50" >
+				<h:outputText value="#{point.distance}">
+					<f:convertNumber maxFractionDigits="0" />
+				</h:outputText>
+			</p:column>
+			<p:column headerText="Tot.Dist.&lt;br/&gt;[km]" width="60">
+				<h:outputText value="#{point.totalDistance}">
+					<f:convertNumber pattern="#0.00" />				
+				</h:outputText>
+			</p:column>
+			<p:column headerText="Motion" width="50">
+				<h:outputText value="#{point.motion}"/>
+			</p:column>
+			<p:column headerText="Accu" width="30">
+				<h:outputText value="#{point.batteryLevel}">
+					<f:convertNumber maxFractionDigits="0"/>
+				</h:outputText>
+			</p:column>
+			<p:column headerText="Lat" width="70">
+				<h:outputText value="#{point.latitude}" />
+			</p:column>
+			<p:column headerText="Long" width="70">
+				<h:outputText value="#{point.longitude}" />
+			</p:column>
+			<p:column headerText="Alt" width="70">
+				<h:outputText value="#{point.altitude}">
+					<f:convertNumber maxFractionDigits="6"/>
+				</h:outputText>
+			</p:column>
+						
+			<p:columnGroup type="footer">
+                <p:row>
+                    <p:column footerText="Totals:"/>
+                    <p:column footerText="#{tripSessionBean.totalTime}" />
+                    <p:column/>
+                    <p:column footerText="#{tripSessionBean.avgSpeed}" />
+                    <p:column/>                    
+                    <p:column footerText="#{tripSessionBean.totalDistance}" />
+                    <p:column/>                    
+                    <p:column footerText="#{tripSessionBean.avgAccuPercentage}" />
+                    <p:column colspan="2"/>                    
+                    <p:column footerText="#{tripSessionBean.avgAltitude}" />
+                </p:row>
+            </p:columnGroup>
+        </p:dataTable>
+		
 	</h:form>
 </h:body>
 </html>

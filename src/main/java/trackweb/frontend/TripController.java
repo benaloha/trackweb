@@ -13,15 +13,13 @@ import org.primefaces.event.SelectEvent;
 import lombok.Getter;
 import lombok.Setter;
 import trackweb.model.TripDTO;
-import trackweb.service.TripService;
 
 @Named
 @ViewScoped
 public class TripController implements Serializable{
 
 	private static final long serialVersionUID = 1804468353914632729L;
-	@Inject
-	private TripService tripService;
+
 	@Inject
 	private TripSessionBean tripSessionBean;
 	@Getter
@@ -32,13 +30,10 @@ public class TripController implements Serializable{
 	private Date to;
     
     public void retrieveTrips() {
-    	tripSessionBean.setTrips(tripService.getTrips(from, to));
+       	tripSessionBean.retrieveTrips(from, to);
     }
     
 	public void onTripRowSelect(SelectEvent event) throws IOException {
 		tripSessionBean.setSelectedTrip((TripDTO) event.getObject());
-		tripSessionBean.setPoints(tripService.getRoute(
-				tripSessionBean.getSelectedTrip().getStartTime(),
-				tripSessionBean.getSelectedTrip().getEndTime()));
 	}
 }
