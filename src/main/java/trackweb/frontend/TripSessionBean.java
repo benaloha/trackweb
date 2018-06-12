@@ -62,7 +62,7 @@ public class TripSessionBean implements Serializable{
 		double avgAltitudeDouble = getPoints().stream().mapToDouble(PositionDTO::getAltitude).average().orElse(0);
 
 		
-		totalTime = duration.toString();
+		totalTime = duration.toString().replace("PT", "");
 		avgSpeed = String.format("%.1f", avgSpeedDouble);
 		totalDistance = String.format("%.1f", totalDistanceDouble);
 		avgAccuPercentage = String.format("%.0f", avgAccuPercentageDouble);
