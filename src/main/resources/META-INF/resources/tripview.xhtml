@@ -22,7 +22,9 @@
 		</h:panelGrid>
 
 		<p:commandButton value="Get Trips" update="tripsTable"
-			actionListener="#{tripController.submit}"/>
+			actionListener="#{tripController.retrieveTrips}"/>
+
+		<p:button id="mapButton" outcome="tripmap" value="Show Map"/>
 
 		<p:dialog modal="true" resizable="false" header="Values"
 			widgetVar="dlg" showEffect="fold">
@@ -39,9 +41,19 @@
 			</p:panelGrid>
 		</p:dialog>
 
-		<p:dataTable id="tripsTable" var="trip" resizableColumns="true"
-			scrollable="true" scrollHeight="150" value="#{tripController.trips}">
-
+		<p:dataTable id="tripsTable"
+			var="trip"
+			value="#{tripController.trips}"
+			rowIndexVar="index" 
+			rowKey="#{trip.startTime}"
+			selection="#{tripController.selectedTrip}" 
+			selectionMode="single"
+			resizableColumns="true"
+			scrollable="true"
+			scrollHeight="150">
+			
+			<p:ajax event="rowSelect" listener="#{tripController.onRowSelect}" />
+			
 			<f:facet name="header">Trips
 			</f:facet>
 
