@@ -13,15 +13,18 @@
 	<h:form	prependId="false">
 		<p:growl id="msgs" showDetail="true" />
 
-		<h:panelGrid columns="6" cellpadding="5">
+		<h:panelGrid columns="7" cellpadding="5">
 			<p:outputLabel for="from" value="From:" />
 			<p:calendar id="from" value="#{tripController.from}" />
 
 			<p:outputLabel for="to" value="To:" />
 			<p:calendar id="to" value="#{tripController.to}" />
 
-			<p:commandButton value="Get Trips" update="tripsTable"
+			<p:commandButton value="Get Trips" update="tripsTable, pointsTable"
 				actionListener="#{tripController.retrieveTrips}"/>
+
+			<p:commandButton value="Get All Points" update="pointsTable, tripsTable"
+				actionListener="#{tripController.getAllPoints}"/>
 				
 			<p:button id="mapButton" outcome="tripmap" value="Show Map"/>
 		</h:panelGrid>
