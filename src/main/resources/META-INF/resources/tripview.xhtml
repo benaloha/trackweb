@@ -90,7 +90,7 @@
 			draggableColumns="true"
 			rows="5"
 			paginator="true"
-			sortBy="#{point.id}"
+			sortBy="#{point.deviceTime}"
 			paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
 			rowsPerPageTemplate="5, 10, 15">
 
@@ -109,7 +109,7 @@
 					<f:convertNumber minFractionDigits="1" maxFractionDigits="1" />
 				</h:outputText>
 			</p:column>
-			<p:column headerText="Dist.&lt;br/&gt;[m]" escape="false" width="50" >
+			<p:column headerText="Dist.&lt;br/&gt;[m]" width="50" >
 				<h:outputText value="#{point.distance}">
 					<f:convertNumber maxFractionDigits="0" />
 				</h:outputText>
@@ -122,7 +122,7 @@
 			<p:column headerText="Address" width="450">
 				<h:outputText value="#{point.address}" />
 			</p:column>
-			<p:column headerText="Motion" width="50">
+			<p:column headerText="Motion" sortBy="#{point.motion}" width="50">
 				<h:outputText value="#{point.motion}"/>
 			</p:column>
 			<p:column headerText="Accu" width="30">
@@ -130,13 +130,13 @@
 					<f:convertNumber maxFractionDigits="0"/>
 				</h:outputText>
 			</p:column>
-			<p:column headerText="Lat" width="70">
+			<p:column headerText="Lat" sortBy="#{point.latitude}" width="70">
 				<h:outputText value="#{point.latitude}" />
 			</p:column>
-			<p:column headerText="Long" width="70">
+			<p:column headerText="Long" sortBy="#{point.longitude}" width="70">
 				<h:outputText value="#{point.longitude}" />
 			</p:column>
-			<p:column headerText="Alt" width="70">
+			<p:column headerText="Alt" sortBy="#{point.altitude}" width="70">
 				<h:outputText value="#{point.altitude}">
 					<f:convertNumber maxFractionDigits="6"/>
 				</h:outputText>
