@@ -144,7 +144,19 @@
 						
 			<p:columnGroup type="footer">
                 <p:row>
-                    <p:column footerText="Totals:"/>
+                    <p:column footerText="Moving"/>
+                    <p:column footerText="#{tripSessionBean.movingTime}" />
+                    <p:column footerText="#{tripSessionBean.movingAvgSpeed}" />
+                    <p:column/>                    
+                    <p:column footerText="#{tripSessionBean.totalDistance}" />
+                    <p:column/>                    
+                    <p:column/>
+                    <p:column footerText="#{tripSessionBean.avgAccuPercentage}" />
+                    <p:column colspan="2"/>                    
+                    <p:column footerText="#{tripSessionBean.avgAltitude}" />
+                </p:row>
+                <p:row>
+                    <p:column footerText="Total"/>
                     <p:column footerText="#{tripSessionBean.totalTime}" />
                     <p:column footerText="#{tripSessionBean.avgSpeed}" />
                     <p:column/>                    

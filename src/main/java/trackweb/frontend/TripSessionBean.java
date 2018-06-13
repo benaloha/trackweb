@@ -30,6 +30,8 @@ public class TripSessionBean implements Serializable{
 	private String totalDistance;
 	private String avgAccuPercentage;
 	private String avgAltitude;
+	private String movingTime;
+	private String movingAvgSpeed;
     
 	public void setSelectedTrip(TripDTO selectedTrip) {
 		if (selectedTrip != null) {
@@ -60,10 +62,20 @@ public class TripSessionBean implements Serializable{
 		double avgSpeedDouble = totalDistanceDouble / duration.getSeconds() * 3600;
 		double avgAccuPercentageDouble = getPoints().stream().mapToDouble(PositionDTO::getBatteryLevel).average().orElse(0);
 		double avgAltitudeDouble = getPoints().stream().mapToDouble(PositionDTO::getAltitude).average().orElse(0);
-
+		Duration movingDuration = Duration.ofMillis(0);
+		for (int i = 1; i < getPoints().size(); i++) {
+			if (getPoints().get(i).isMotion()) {
+				long deltaTime = getPoints().get(i).getDeviceTime().getTime() -
+						getPoints().get(i-1).getDeviceTime().getTime();
+				movingDuration = movingDuration.plusMillis(deltaTime);
+			}
+		}
+		double avgMovingSpeedDouble = totalDistanceDouble / movingDuration.getSeconds() * 3600;
 		
 		totalTime = duration.toString().replace("PT", "");
 		avgSpeed = String.format("%.1f", avgSpeedDouble);
+		movingTime = movingDuration.toString().replace("PT", "");
+		movingAvgSpeed = String.format("%.1f", avgMovingSpeedDouble);
 		totalDistance = String.format("%.1f", totalDistanceDouble);
 		avgAccuPercentage = String.format("%.0f", avgAccuPercentageDouble);
 		avgAltitude = String.format("%.5f", avgAltitudeDouble);
