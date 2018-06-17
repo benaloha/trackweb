@@ -11,6 +11,7 @@ import org.apache.commons.lang3.time.FastDateFormat;
 import org.springframework.stereotype.Service;
 import org.traccar.api.TraccarApiClient;
 import org.traccar.api.model.Position;
+import org.traccar.api.model.TripReport;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -23,10 +24,10 @@ public class TripRepository {
 
 	private final static FastDateFormat DATE_FORMATTER = DateFormatUtils.ISO_8601_EXTENDED_DATETIME_FORMAT;
 
-	public List<Position> getRoute(Date from, Date to) {
-		List<Position> list = new ArrayList<>();
+	public List<TripReport> getTrips(Date from, Date to) {
+		List<TripReport> list = new ArrayList<>();
 
-		String url = String.format("http://192.168.2.12:8082/api/reports/route?deviceId=1&from=%s&to=%s",
+		String url = String.format("http://192.168.2.12:8082/api/reports/trips?deviceId=1&from=%s&to=%s",
 				DATE_FORMATTER.format(from), DATE_FORMATTER.format(to));
 
 		Optional<String> response = new TraccarApiClient().get(url);
@@ -35,6 +36,27 @@ public class TripRepository {
 			return list;
 		}
 
+		try {
+			list = new ObjectMapper().readValue(response.get(), new TypeReference<List<TripReport>>(){});
+		} catch (IOException e) {
+			log.error("Json response not mapped to List<Position>.");
+			log.error(e.getMessage());
+		}
+		return list;
+	}
+
+	public List<Position> getRoute(Date from, Date to) {
+		List<Position> list = new ArrayList<>();
+	
+		String url = String.format("http://192.168.2.12:8082/api/reports/route?deviceId=1&from=%s&to=%s",
+				DATE_FORMATTER.format(from), DATE_FORMATTER.format(to));
+	
+		Optional<String> response = new TraccarApiClient().get(url);
+	
+		if (!response.isPresent()) {
+			return list;
+		}
+	
 		try {
 			list = new ObjectMapper().readValue(response.get(), new TypeReference<List<Position>>(){});
 		} catch (IOException e) {

@@ -41,7 +41,7 @@ public class PositionDTO implements Comparable<PositionDTO>{
 
 	@Override
 	public int compareTo(PositionDTO other) {
-		return Long.valueOf(deviceTime.getTime()).compareTo(Long.valueOf(other.getDeviceTime().getTime()));
+		return deviceTime.compareTo(other.getDeviceTime());
 	}
     
 }

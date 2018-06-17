@@ -1,6 +1,7 @@
 package trackweb.frontend;
 
 import java.io.Serializable;
+import java.util.stream.Collectors;
 
 import javax.annotation.PostConstruct;
 import javax.faces.view.ViewScoped;
@@ -16,17 +17,17 @@ public class TripMapController implements Serializable{
 
 	private static final long serialVersionUID = 6307292393448463495L;
 	@Inject
-	private TripSessionBean tripSession;
+	private TripSessionBean tripSessionBean;
 	@Getter
 	private String route;
     
 	@PostConstruct
     public void init(){
-		if (tripSession.getPoints()!=null) {
+		if (tripSessionBean.getPoints()!=null) {
 			
 			StringBuilder sb = new StringBuilder("[");
 			
-	    	for(PositionDTO point: tripSession.getPoints()) {
+	    	for(PositionDTO point: tripSessionBean.getPoints().stream().sorted().collect(Collectors.toList())) {
 	    		sb.append("['")
 	    		.append(point.getDeviceTime().toString()).append("', ")
 	    		.append(point.getLatitude()).append(", ")

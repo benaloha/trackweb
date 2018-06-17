@@ -10,6 +10,7 @@ import javax.inject.Inject;
 import org.springframework.stereotype.Service;
 
 import trackweb.model.PositionDTO;
+import trackweb.model.TripDTO;
 import trackweb.repository.TripRepository;
 
 @Service
@@ -22,6 +23,14 @@ private TripRepository tripRepos;
 		return tripRepos.getRoute(from, to)
 				.stream()
 				.map(p -> PositionDTO.positionConverter(p))
+				.sorted()
+				.collect(Collectors.toList());
+	}
+	
+	public List<TripDTO> getTrips(Date from, Date to){
+		return tripRepos.getTrips(from, to)
+				.stream()
+				.map(p -> TripDTO.tripConverter(p))
 				.sorted()
 				.collect(Collectors.toList());
 	}
