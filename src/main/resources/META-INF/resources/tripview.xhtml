@@ -13,7 +13,7 @@
 	<h:form	prependId="false">
 		<p:growl id="msgs" showDetail="true" />
 
-		<h:panelGrid columns="7" cellpadding="5">
+		<h:panelGrid columns="8" cellpadding="5">
 			<p:outputLabel for="from" value="From:" />
 			<p:calendar id="from" value="#{tripController.from}" />
 
@@ -27,6 +27,8 @@
 				actionListener="#{tripController.getAllPoints}"/>
 				
 			<p:button id="mapButton" outcome="tripmap" value="Show Map"/>
+			
+			<p:button id="graphButton" outcome="tripgraph" value="Show Chart"/>
 		</h:panelGrid>
 
 		<p:dataTable id="tripsTable"
