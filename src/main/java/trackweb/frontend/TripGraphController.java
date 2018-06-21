@@ -9,10 +9,12 @@ import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 
+import org.primefaces.model.chart.Axis;
 import org.primefaces.model.chart.AxisType;
 import org.primefaces.model.chart.DateAxis;
 import org.primefaces.model.chart.LineChartModel;
 import org.primefaces.model.chart.LineChartSeries;
+import org.primefaces.model.chart.LinearAxis;
 
 import lombok.Getter;
 import trackweb.model.PositionDTO;
@@ -52,21 +54,27 @@ public class TripGraphController implements Serializable{
         dateModel = new LineChartModel();
         
         speedLine = new LineChartSeries();
-        speedLine.setLabel("Speed[km/h]");
 	    dateModel.addSeries(speedLine);
  
         altitudeLine = new LineChartSeries();
-        altitudeLine.setLabel("Altitude[m]");
-	    dateModel.addSeries(altitudeLine);
+        altitudeLine.setXaxis(AxisType.X2);
+        altitudeLine.setYaxis(AxisType.Y2);
+        dateModel.addSeries(altitudeLine);
         
         dateModel.setTitle("Speed versus Altitude");
         dateModel.setZoom(true);
-        dateModel.getAxis(AxisType.Y).setLabel("Speed[km/h] and Altitude[m]");
+         
+        Axis yAxis = dateModel.getAxis(AxisType.Y);
+        yAxis.setLabel("Speed [km/h]");
+                 
+        Axis y2Axis = new LinearAxis("Altitude [m]");
+        dateModel.getAxes().put(AxisType.Y2, y2Axis);
+        
         xAxis = new DateAxis("Time");
         xAxis.setTickAngle(-50);
         xAxis.setTickFormat("%H:%#M:%S");
-         
         dateModel.getAxes().put(AxisType.X, xAxis);
-    }
+        dateModel.getAxes().put(AxisType.X2, xAxis);
+	}
     
 }
