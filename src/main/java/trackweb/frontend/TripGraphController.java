@@ -12,6 +12,7 @@ import javax.inject.Named;
 import org.primefaces.model.chart.Axis;
 import org.primefaces.model.chart.AxisType;
 import org.primefaces.model.chart.DateAxis;
+import org.primefaces.model.chart.LegendPlacement;
 import org.primefaces.model.chart.LineChartModel;
 import org.primefaces.model.chart.LineChartSeries;
 import org.primefaces.model.chart.LinearAxis;
@@ -52,13 +53,16 @@ public class TripGraphController implements Serializable{
 
 	private void initDateModel() {
         dateModel = new LineChartModel();
+        dateModel.setLegendPosition("ne");
         
         speedLine = new LineChartSeries();
+        speedLine.setLabel("Speed");
 	    dateModel.addSeries(speedLine);
  
         altitudeLine = new LineChartSeries();
         altitudeLine.setXaxis(AxisType.X2);
         altitudeLine.setYaxis(AxisType.Y2);
+        altitudeLine.setLabel("Altitude");
         dateModel.addSeries(altitudeLine);
         
         dateModel.setTitle("Speed versus Altitude");
