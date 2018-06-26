@@ -54,19 +54,19 @@ public class TripGraphController implements Serializable{
 	private void initDateModel() {
         dateModel = new LineChartModel();
         dateModel.setLegendPosition("ne");
+        dateModel.setTitle("Speed versus Altitude");
+        dateModel.setZoom(true);
         
-        speedLine = new LineChartSeries();
-        speedLine.setLabel("Speed");
-	    dateModel.addSeries(speedLine);
- 
         altitudeLine = new LineChartSeries();
         altitudeLine.setXaxis(AxisType.X2);
         altitudeLine.setYaxis(AxisType.Y2);
         altitudeLine.setLabel("Altitude");
+        altitudeLine.setFill(true);
         dateModel.addSeries(altitudeLine);
-        
-        dateModel.setTitle("Speed versus Altitude");
-        dateModel.setZoom(true);
+
+        speedLine = new LineChartSeries();
+        speedLine.setLabel("Speed");
+	    dateModel.addSeries(speedLine);
          
         Axis yAxis = dateModel.getAxis(AxisType.Y);
         yAxis.setLabel("Speed [km/h]");
