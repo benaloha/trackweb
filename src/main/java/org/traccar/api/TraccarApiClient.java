@@ -14,12 +14,11 @@ public class TraccarApiClient {
 	private OkHttpClient client;
 	private Builder requestBuilder;
 
-	public TraccarApiClient() {
+	public TraccarApiClient(String authHeader) {
 		client = new OkHttpClient();
 		requestBuilder = new Request.Builder().addHeader("Accept", "application/json")
 				.addHeader("Content-Type", "application/json")
-				// TODO uit config file.
-				.addHeader("Authorization", "Basic TODO")
+				.addHeader("Authorization", authHeader)
 				.addHeader("Cache-Control", "no-cache");
 	}
 

@@ -6,8 +6,11 @@ import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
+import javax.annotation.PostConstruct;
+
 import org.apache.commons.lang3.time.DateFormatUtils;
 import org.apache.commons.lang3.time.FastDateFormat;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.traccar.api.TraccarApiClient;
 import org.traccar.api.model.Position;
@@ -23,14 +26,31 @@ import lombok.extern.log4j.Log4j2;
 public class TripRepository {
 
 	private final static FastDateFormat DATE_FORMATTER = DateFormatUtils.ISO_8601_EXTENDED_DATETIME_FORMAT;
+	@Value("${org.traccar.api.host}")
+	private String host;
+	@Value("${org.traccar.api.port}")
+	private String port;
+	@Value("${org.traccar.api.authentication.header}")
+	private String authHeader;
+	@Value("${org.traccar.api.route.url}")
+	private String routePartUrl;
+	@Value("${org.traccar.api.trips.url}")
+	private String tripsPartUrl;
+	private TraccarApiClient apiClient;
+	private String contextRoot;
 
+	@PostConstruct
+	private void init() {
+		apiClient = new TraccarApiClient(authHeader);
+		contextRoot = String.format("http://%s:%s", host, port);
+	}
+	
 	public List<TripReport> getTrips(Date from, Date to) {
 		List<TripReport> list = new ArrayList<>();
 
-		String url = String.format("http://192.168.2.12:8082/api/reports/trips?deviceId=1&from=%s&to=%s",
-				DATE_FORMATTER.format(from), DATE_FORMATTER.format(to));
+		String url = String.format(contextRoot + tripsPartUrl, DATE_FORMATTER.format(from), DATE_FORMATTER.format(to));
 
-		Optional<String> response = new TraccarApiClient().get(url);
+		Optional<String> response = apiClient.get(url);
 
 		if (!response.isPresent()) {
 			return list;
@@ -48,10 +68,9 @@ public class TripRepository {
 	public List<Position> getRoute(Date from, Date to) {
 		List<Position> list = new ArrayList<>();
 	
-		String url = String.format("http://192.168.2.12:8082/api/reports/route?deviceId=1&from=%s&to=%s",
-				DATE_FORMATTER.format(from), DATE_FORMATTER.format(to));
+		String url = String.format(contextRoot + routePartUrl, DATE_FORMATTER.format(from), DATE_FORMATTER.format(to));
 	
-		Optional<String> response = new TraccarApiClient().get(url);
+		Optional<String> response = apiClient.get(url);
 	
 		if (!response.isPresent()) {
 			return list;
