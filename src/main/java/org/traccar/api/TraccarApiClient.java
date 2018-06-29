@@ -1,5 +1,6 @@
 package org.traccar.api;
 
+import java.util.Base64;
 import java.util.Optional;
 
 import lombok.extern.log4j.Log4j2;
@@ -14,11 +15,17 @@ public class TraccarApiClient {
 	private OkHttpClient client;
 	private Builder requestBuilder;
 
-	public TraccarApiClient(String authHeader) {
+	public TraccarApiClient(String user, String password) {
+		
+		String authHeader = Base64
+				.getEncoder()
+				.encodeToString(
+						String.format("%s:%s", user, password)
+						.getBytes());
 		client = new OkHttpClient();
 		requestBuilder = new Request.Builder().addHeader("Accept", "application/json")
 				.addHeader("Content-Type", "application/json")
-				.addHeader("Authorization", authHeader)
+				.addHeader("Authorization", "Basic " + authHeader)
 				.addHeader("Cache-Control", "no-cache");
 	}
 

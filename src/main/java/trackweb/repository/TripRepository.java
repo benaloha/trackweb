@@ -30,6 +30,10 @@ public class TripRepository {
 	private String host;
 	@Value("${org.traccar.api.port}")
 	private String port;
+	@Value("${org.traccar.api.user}")
+	private String user;
+	@Value("${org.traccar.api.password}")
+	private String password;
 	@Value("${org.traccar.api.authentication.header}")
 	private String authHeader;
 	@Value("${org.traccar.api.route.url}")
@@ -41,7 +45,7 @@ public class TripRepository {
 
 	@PostConstruct
 	private void init() {
-		apiClient = new TraccarApiClient(authHeader);
+		apiClient = new TraccarApiClient(user, password);
 		contextRoot = String.format("http://%s:%s", host, port);
 	}
 	
