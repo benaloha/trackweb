@@ -34,8 +34,6 @@ public class TripRepository {
 	private String user;
 	@Value("${org.traccar.api.password}")
 	private String password;
-	@Value("${org.traccar.api.authentication.header}")
-	private String authHeader;
 	@Value("${org.traccar.api.route.url}")
 	private String routePartUrl;
 	@Value("${org.traccar.api.trips.url}")
