@@ -17,7 +17,7 @@
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<primefaces-theme.version>1.0.10</primefaces-theme.version>
-		<java.version>11</java.version>
+		<java.version>1.8</java.version>
 		<joinfaces.version>4.0.9</joinfaces.version>
 		<maven-model.version>3.6.0</maven-model.version>
 	</properties>
