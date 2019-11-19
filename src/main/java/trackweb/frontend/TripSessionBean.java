@@ -6,17 +6,18 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import javax.faces.bean.SessionScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 
 import lombok.Getter;
-import org.springframework.web.context.annotation.SessionScope;
+import lombok.Setter;
 import trackweb.model.PositionDTO;
 import trackweb.model.TripDTO;
 import trackweb.service.TripService;
 
 @Named
-@SessionScope
+@SessionScoped
 @Getter
 public class TripSessionBean implements Serializable {
 
