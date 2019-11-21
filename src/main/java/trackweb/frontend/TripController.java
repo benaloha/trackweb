@@ -37,7 +37,7 @@ public class TripController implements Serializable{
        	tripSessionBean.getAllPoints(from, to);
     }
     
-	public void onTripRowSelect(SelectEvent event) throws IOException {
+	public void onTripRowSelect(SelectEvent event) {
 		tripSessionBean.setSelectedTrip((TripDTO) event.getObject());
 	}
 }
