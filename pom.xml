@@ -5,7 +5,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>track</groupId>
 	<artifactId>trackweb</artifactId>
-	<version>2.0</version>
+	<version>2.1</version>
 
 	<parent>
 		<groupId>org.springframework.boot</groupId>
@@ -17,6 +17,7 @@
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<primefaces-theme.version>1.0.10</primefaces-theme.version>
+		<primefaces.version>6.2</primefaces.version>
 		<java.version>11</java.version>
 		<joinfaces.version>4.0.9</joinfaces.version>
 		<maven-model.version>3.6.0</maven-model.version>
@@ -41,6 +42,11 @@
 				<artifactId>smoothness</artifactId>
 				<version>${primefaces-theme.version}</version>
 			</dependency>
+			<dependency>
+				<groupId>org.primefaces</groupId>
+				<artifactId>primefaces</artifactId>
+				<version>${primefaces.version}</version>
+			</dependency>
 		</dependencies>
 	</dependencyManagement>
 
@@ -56,6 +62,10 @@
 				<exclusion>
 					<groupId>org.joinfaces</groupId>
 					<artifactId>jetty-spring-boot-starter</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>org.primefaces</groupId>
+					<artifactId>primefaces</artifactId>
 				</exclusion>
 				<exclusion>
 					<groupId>org.joinfaces</groupId>
@@ -122,7 +132,17 @@
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-security</artifactId>
-		</dependency>		
+		</dependency>
+		<dependency>
+			<groupId>org.primefaces.themes</groupId>
+			<artifactId>smoothness</artifactId>
+			<version>${primefaces-theme.version}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.primefaces</groupId>
+			<artifactId>primefaces</artifactId>
+			<version>${primefaces.version}</version>
+		</dependency>
 		<dependency>
 			<groupId>org.projectlombok</groupId>
 			<artifactId>lombok</artifactId>
