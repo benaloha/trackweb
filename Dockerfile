@@ -8,11 +8,11 @@ RUN apt upgrade -y
 RUN apt install openjdk-11-jre-headless -y
 
 # application
-ADD target/trackweb-2.0.jar /root/
+ADD target/trackweb-2.1.jar /root/trackweb.jar
 ADD application.properties /root/
 
 #run application
-CMD ["./root/trackweb-2.0.jar", "run"]
+#CMD ["./root/trackweb.jar", "run"]
 
 EXPOSE 8084
 

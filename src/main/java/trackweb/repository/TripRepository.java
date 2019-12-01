@@ -1,10 +1,10 @@
 package trackweb.repository;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Optional;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.time.format.DateTimeFormatter;
+import java.util.*;
 
 import javax.annotation.PostConstruct;
 
@@ -25,7 +25,7 @@ import lombok.extern.log4j.Log4j2;
 @Log4j2
 public class TripRepository {
 
-	private final static FastDateFormat DATE_FORMATTER = DateFormatUtils.ISO_8601_EXTENDED_DATETIME_FORMAT;
+	private static DateFormat DATE_FORMATTER;
 	@Value("${org.traccar.api.host}")
 	private String host;
 	@Value("${org.traccar.api.port}")
@@ -45,6 +45,9 @@ public class TripRepository {
 	private void init() {
 		apiClient = new TraccarApiClient(user, password);
 		contextRoot = String.format("http://%s:%s", host, port);
+		TimeZone tz = TimeZone.getTimeZone("UTC");
+		DATE_FORMATTER = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm'Z'"); // Quoted "Z" to indicate UTC, no timezone offset
+		DATE_FORMATTER.setTimeZone(tz);
 	}
 	
 	public List<TripReport> getTrips(Date from, Date to) {
