@@ -15,16 +15,16 @@
 
 		<h:panelGrid columns="8" cellpadding="5">
 			<p:outputLabel for="from" value="From:" />
-			<p:calendar id="from" value="#{tripController.from}" />
+			<p:calendar id="from" value="#{tripSessionBean.from}" />
 
 			<p:outputLabel for="to" value="To:" />
-			<p:calendar id="to" value="#{tripController.to}" />
+			<p:calendar id="to" value="#{tripSessionBean.to}" />
 
 			<p:commandButton value="Get Trips" update="tripsTable, pointsTable"
-				actionListener="#{tripController.retrieveTrips}"/>
+				actionListener="#{tripSessionBean.retrieveTrips}"/>
 
 			<p:commandButton value="Get All Points" update="pointsTable, tripsTable"
-				actionListener="#{tripController.getAllPoints}"/>
+				actionListener="#{tripSessionBean.getAllPoints}"/>
 				
 			<p:button id="mapButton" outcome="tripmap" value="Show Map"/>
 			
@@ -35,14 +35,14 @@
 			var="trip"
 			value="#{tripSessionBean.trips}"
 			rowIndexVar="index" 
-			rowKey="#{trip.startTime}"
+			rowKey="#{trip.id}"
 			selection="#{tripSessionBean.selectedTrip}" 
 			selectionMode="single"
 			resizableColumns="true"
 			scrollable="true"
 			scrollHeight="141">
 			
-			<p:ajax event="rowSelect" listener="#{tripController.onTripRowSelect}" update="pointsTable" />
+			<p:ajax event="rowSelect" listener="#{tripSessionBean.onTripRowSelect}" update="pointsTable" />
 			
 			<f:facet name="header">Trips
 			</f:facet>

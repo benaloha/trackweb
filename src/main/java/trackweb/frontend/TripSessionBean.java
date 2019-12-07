@@ -12,6 +12,7 @@ import javax.inject.Named;
 
 import lombok.Getter;
 import lombok.Setter;
+import org.primefaces.event.SelectEvent;
 import trackweb.model.PositionDTO;
 import trackweb.model.TripDTO;
 import trackweb.service.TripService;
@@ -34,8 +35,21 @@ public class TripSessionBean implements Serializable {
 	private String avgAltitude;
 	private String movingTime;
 	private String movingAvgSpeed;
+	@Setter
+	private Date from;
+	@Setter
+	private Date to;
 
-	public void getAllPoints(Date from, Date to) {
+
+	public void onTripRowSelect(SelectEvent event) {
+		setSelectedTrip((TripDTO) event.getObject());
+		if (getSelectedTrip() != null) {
+			points = tripService.getRoute(getSelectedTrip().getStartTime(), getSelectedTrip().getEndTime());
+			calculateSummary();
+		}
+	}
+
+	public void getAllPoints() {
 			trips = null;
 			selectedTrip = null;
 			points = tripService.getRoute(from, to);
@@ -43,14 +57,10 @@ public class TripSessionBean implements Serializable {
 	}
 
 	public void setSelectedTrip(TripDTO selectedTrip) {
-		if (selectedTrip != null) {
-			this.selectedTrip = selectedTrip;
-			points = tripService.getRoute(getSelectedTrip().getStartTime(), getSelectedTrip().getEndTime());
-			calculateSummary();
-		}
+		this.selectedTrip = selectedTrip;
 	}
 
-	public void retrieveTrips(Date from, Date to) {
+	public void retrieveTrips() {
 		if (from != null && to != null) {
 			trips = tripService.getTrips(from, to);
 		} else {

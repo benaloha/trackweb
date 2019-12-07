@@ -10,6 +10,7 @@ import lombok.Data;
 @Data
 public class TripDTO implements Comparable<TripDTO> {
 
+	private long id;
 	private Date startTime;
 	private String startAddress;
 	private Date endTime;
@@ -26,7 +27,8 @@ public class TripDTO implements Comparable<TripDTO> {
 	
 	public static TripDTO tripConverter(TripReport report) {
 		TripDTO dto = new TripDTO();
-		
+
+		dto.setId(report.getStartPositionId());
 		dto.setStartTime(report.getStartTime());
 		dto.setStartAddress(report.getStartAddress());
 		dto.setEndTime(report.getEndTime());
