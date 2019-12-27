@@ -1,18 +1,13 @@
-FROM debian
-
-# update
-RUN apt update
-RUN apt upgrade -y
-
-# openjdk
-RUN apt install openjdk-11-jre-headless -y
+#FROM arm32v7/openjdk:11-jre-slim
+FROM openjdk:8-jre-alpine
 
 # application
-ADD target/trackweb-2.1.jar /root/trackweb.jar
 ADD application.properties /root/
+ADD trackweb-2.1.jar /root/trackweb.jar
+
 
 #run application
-#CMD ["./root/trackweb.jar", "run"]
+CMD ["./root/trackweb.jar", "run"]
 
 EXPOSE 8084
 
