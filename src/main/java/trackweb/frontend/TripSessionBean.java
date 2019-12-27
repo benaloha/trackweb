@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import javax.faces.bean.SessionScoped;
+import javax.enterprise.context.SessionScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 
@@ -36,9 +36,9 @@ public class TripSessionBean implements Serializable {
 	private String movingTime;
 	private String movingAvgSpeed;
 	@Setter
-	private Date from;
+	private Date from = new Date();
 	@Setter
-	private Date to;
+	private Date to = new Date((new Date().getTime() + 24*60*60*1000));
 
 
 	public void onTripRowSelect(SelectEvent event) {
